@@ -18,7 +18,10 @@ void sixfive(int fd) {
     while (read(fd, &c, 1) > 0) {
         
         if (c >= '0' && c <= '9') {
-            buf[i++] = c;
+            if (i < (int)sizeof(buf) - 1)
+                buf[i++] = c;
+            else
+                i = 0;
         } 
         else if (strchr(separator, c) != 0) {
             if (i > 0) {
@@ -30,11 +33,11 @@ void sixfive(int fd) {
         else {
             i = 0;
         }
+    }
 
-        if (i > 0) {
-            buf[i] = '\0';
-            process_number(buf);
-        }
+    if (i > 0) {
+        buf[i] = '\0';
+        process_number(buf);
     }
 }
 
