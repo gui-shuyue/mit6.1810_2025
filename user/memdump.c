@@ -71,9 +71,9 @@ memdump(char *fmt, char *data)
         break;
       case 'p':
         // 8字节 64-bit 指针，打印为十六进制
-        // 在 xv6 中使用 %p 打印 uint64
+        // C 的 %p 需要 void* 参数
         uint64 ptr_val = *(uint64*)p;
-        printf("%p\n", ptr_val);
+        printf("%p\n", (void*)ptr_val);
         p += sizeof(uint64);
         break;
       case 'h':
